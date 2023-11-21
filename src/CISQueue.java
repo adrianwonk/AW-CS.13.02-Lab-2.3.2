@@ -1,26 +1,52 @@
 import java.util.Arrays;
 
 public class CISQueue {
+    Integer[] array;
+    int size;
+    int index;
+    public CISQueue(int value){
+        array = new Integer[value];
+        int size = 0;
+        int index = 0;
+    }
 
-    // Array property.
-    
-    // Size property.
-    
-    // Index pointer. Indicates the index of the most recently added element.
+    public void enqueue(int value){
+        array[index] = value;
+        index++;
+        size++;
+    }
 
-    // Constructor.
+    public Object dequeue(){
+        if (size == 0)
+        {return null;}
+        int value = array[0];
+        reshuffle();
+        index--;
+        size--;
+        return value;
+    }
 
-    // Enqueue. This method adds a node to the end of the linked list.
+    public void reshuffle(){
+        for (int i = 0; i < index; i++){
+            array[i] = array[i+1];
+        }
+        array[index] = 0;
+    }
 
-    // Dequeue. This method removes a node from the beginning of the linked list.
-
-    // isEmpty. Returns a boolean indicating whether the linked list is empty.
-
-    // size. Returns the size of the queue.
-
-    // reshuffle. Moves each element down one index. Called whenever we dequeue.
-
-    // toString. Returns a description of the queue in, for example, the following format:
-    // CISQueue{queue=[7, 11], size=2, pointer=1}
+    public boolean isEmpty() {
+        return (size == 0);
+    }
+    public int size(){
+        return size;
+    }
+    public String toString(){
+        String result = "CISQueue{queue=[";
+        for (int i = 0; i < array.length; i++){
+            result += "" + array[i] + ", ";
+        }
+        result = result.substring(0,result.length()-2);
+        result += "], size=" + size + ", pointer=" + (index - 1) + "}";
+        return result;
+    }
 
 }
